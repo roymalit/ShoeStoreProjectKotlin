@@ -18,8 +18,14 @@
 
     <style name="LabelTextStyle">
         <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/black_text_color</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="BodyTextStyle">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
 </resources>
