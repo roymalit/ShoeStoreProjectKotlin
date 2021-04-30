@@ -14,10 +14,15 @@ class ShoeViewModel: ViewModel() {
     val shoeList: LiveData<MutableList<Shoe>>
         get() = _shoeList
 
+    private val _shoe = MutableLiveData<Shoe>()
+    val shoe: LiveData<Shoe>
+        get() = _shoe
+
     init {
         Timber.i("ShoeViewModel created!")
         createShoeList()
         _shoeList.value = listOfShoes
+//        _shoe.value = listOfShoes.first()
     }
 
     override fun onCleared() {
@@ -25,6 +30,9 @@ class ShoeViewModel: ViewModel() {
         Timber.i("ShoeViewModel destroyed!")
     }
 
+    /*
+    * Initialize list of shoes if it isn't already
+    */
     private fun createShoeList() {
         if (!this::listOfShoes.isInitialized){
             listOfShoes = mutableListOf()
@@ -48,8 +56,15 @@ class ShoeViewModel: ViewModel() {
         Timber.i(listOfShoes.toString())
     }
 
+    fun nextShoe(){
+        //Select Shoe object from list
+        if (shoeList.value?.isNotEmpty() == true) {
+//            shoe.value = shoeList.value
+        }
+    }
+
     /*
-    * Removes new shoe to the list
+    * Removes last added shoe from the list
     */
     fun removeShoe(){
         if (listOfShoes.size >= 1){

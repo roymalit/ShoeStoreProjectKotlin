@@ -2,24 +2,37 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="shoeViewModel"
+            type="com.example.shoestoreproject_kotlin.shoelist.ShoeViewModel" />
+    </data>
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_shoe_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="8dp"
         tools:context=".shoelist.ShoeListFragment">
 
         <LinearLayout
+            android:id="@+id/ll_shoe_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
             android:orientation="vertical">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_shoe_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
                 android:clickable="true"
                 android:contentDescription="@string/add_new_shoe"
                 android:focusable="true"
                 android:src="@drawable/ic_add" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
