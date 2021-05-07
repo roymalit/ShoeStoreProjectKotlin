@@ -48,6 +48,7 @@
             android:hint="@string/shoe_images_hint"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etml_new_shoe_details" />
@@ -72,6 +73,16 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_cancel"
             app:layout_constraintTop_toBottomOf="@+id/etml_new_shoe_images" />
+
+        <Button
+            android:id="@+id/button_dummy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="360dp"
+            android:text="@string/dummy_data"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

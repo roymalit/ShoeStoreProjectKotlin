@@ -26,4 +26,5 @@
     <string name="save">Save</string>
     <string name="shoe_images_hint">image 1, image 2, image 3…</string>
     <string name="list_item_format">%1$s %2$s %n Size %3$.1f</string>
+    <string name="dummy_data">Dummy Data</string>
 </resources>

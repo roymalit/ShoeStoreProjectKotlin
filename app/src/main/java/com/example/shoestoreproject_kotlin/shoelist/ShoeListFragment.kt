@@ -2,15 +2,14 @@ package com.example.shoestoreproject_kotlin.shoelist
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.shoestoreproject_kotlin.R
 import com.example.shoestoreproject_kotlin.databinding.FragmentShoeListBinding
 import com.example.shoestoreproject_kotlin.models.Shoe
@@ -28,6 +27,22 @@ class ShoeListFragment : Fragment() {
 
     // Used for view child position
     private var position: Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return NavigationUI.onNavDestinationSelected(item, findNavController())
+                || super.onOptionsItemSelected(item)
+    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View {

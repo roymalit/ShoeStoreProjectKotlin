@@ -45,16 +45,21 @@ class ShoeDetailFragment : Fragment() {
             val shoeImages = binding.etmlNewShoeImages.text.toString()
 
             // Checks if either text field is empty before attempting save
-            if (shoeDetails.isBlank() || shoeImages.isBlank()){
-                Toast.makeText(context, "Cannot Save! Both fields must not be empty",
+            // Add || shoeImages.isBlank() when using images editText
+            if (shoeDetails.isBlank()){
+                Toast.makeText(context, "Cannot Save! Field must not be empty",
                     Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.addShoe(shoeDetails, shoeImages)
-                Toast.makeText(context, "Saved!",
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show()
                 binding.etmlNewShoeDetails.text = null
-                binding.etmlNewShoeImages.text = null
+//                binding.etmlNewShoeImages.text = null
             }
+        }
+
+        binding.buttonDummy.setOnClickListener{
+            viewModel.dummyData()
+            Toast.makeText(context, "Dummy data added!", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
