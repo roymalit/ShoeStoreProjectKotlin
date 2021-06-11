@@ -23,12 +23,16 @@ class ShoeDetailFragment : Fragment() {
 
     /*
         shoe detail validation regular expression
-        ^(\w+(?: \w+)*) *, *\d+(?:\.5)* *, *(\w+(?: \w+)*) *, *(\w+(?: \w+)*) *$
+        ^(\w+(?: \w+)*) *,\s*([1-9]|1[0-9]|2[0-2])(\.5)? *,\s*(\w+(?: \w+)*) *,\s*(\w+(?: \w+)*) *$
 
+        TODO: Edit readable explanation
         Readable explanation:
         words+([space]words+)*[space]*,[space]*digit+(.5)*[space]*,
         [space]*words+([space]words+)*[space]*,[space]*words+([space]words+)*[space]*
      */
+    // Regular expression for checking details match format
+    val pattern = "^(\\w+(?: \\w+)*) *,\\s*([1-9]|1[0-9]|2[0-2])(\\.5)? *,\\s*(\\w+(?: \\w+)*) *,\\s*(\\w+(?: \\w+)*) *\$"
+        .toRegex(RegexOption.MULTILINE)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -44,16 +48,24 @@ class ShoeDetailFragment : Fragment() {
             val shoeDetails =  binding.etmlNewShoeDetails.text.toString()
             val shoeImages = binding.etmlNewShoeImages.text.toString()
 
-            // Checks if either text field is empty before attempting save
-            // Add || shoeImages.isBlank() when using images editText
-            if (shoeDetails.isBlank()){
-                Toast.makeText(context, "Cannot Save! Field must not be empty",
+            when {
+                // Checks if either text field is empty before attempting save
+                // Add || shoeImages.isBlank() when using images editText
+                shoeDetails.isBlank() -> Toast.makeText(context,
+                    "Cannot Save! Field(s) must not be empty", Toast.LENGTH_SHORT).show()
+
+                // Check if entered details matches the RegEx pattern
+                !pattern.matches(shoeDetails) -> Toast.makeText(context,
+                    "Entered details don't match required format. Please check again",
                     Toast.LENGTH_SHORT).show()
-            } else {
-                viewModel.addShoe(shoeDetails, shoeImages)
-                Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show()
-                binding.etmlNewShoeDetails.text = null
-//                binding.etmlNewShoeImages.text = null
+
+                // Adds to viewModel if validation is met
+                else -> {
+                    viewModel.addShoe(shoeDetails, shoeImages)
+                    Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show()
+                    binding.etmlNewShoeDetails.text = null
+//                    binding.etmlNewShoeImages.text = null
+                }
             }
         }
 
@@ -64,10 +76,4 @@ class ShoeDetailFragment : Fragment() {
 
         return binding.root
     }
-
-    // Checks if new shoe details are written in correct format
-    private fun newDetailsValidation(){
-
-    }
-
 }

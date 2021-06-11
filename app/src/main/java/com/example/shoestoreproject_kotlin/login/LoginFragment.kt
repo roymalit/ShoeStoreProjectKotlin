@@ -37,7 +37,7 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    // Navigates to the next fragment depending on if the user has visited before
+    // Navigates past the intro fragments depending on if the user has visited before
     private fun login (){
         if (viewModel.visitedBefore.value == true){
             findNavController()

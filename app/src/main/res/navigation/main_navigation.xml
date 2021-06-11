@@ -63,7 +63,8 @@
             android:id="@+id/action_shoeListFragment_to_shoeDetailFragment"
             app:destination="@id/shoeDetailFragment"
             app:enterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_bottom" />
+            app:popExitAnim="@anim/slide_out_bottom"
+            app:popUpTo="@id/shoeListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/shoeDetailFragment"

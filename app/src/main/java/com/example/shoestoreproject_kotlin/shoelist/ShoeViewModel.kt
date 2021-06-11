@@ -52,20 +52,24 @@ class ShoeViewModel: ViewModel() {
     * Adds new shoe to the list
     */
     fun addShoe (shoeDetails: String, shoeImages: String){
+        // Splits string into sections when reaching a comma
         val split = shoeDetails.split(",")
-        val name = split[0]
-        val size = split[1].toDouble()
-        val company = split[2]
-        val description = split[3]
+        // Trim unnecessary whitespace
+        val name = split[0].trim()
+        val size = split[1].trim().toDouble()
+        val company = split[2].trim()
+        val description = split[3].trim()
         // Handles text list of images when implemented. Not mandatory
         val imagesList = shoeImages.split(",")
 
         // Creates Shoe object and adds to list
         _shoe.value = Shoe(name, size, company, description, imagesList)
         listOfShoes.add(shoe.value!!)
+        // For testing
         Timber.i(listOfShoes.toString())
     }
 
+    // Fills the viewModel with dummy data for testing convenience
     fun dummyData (){
         listOfShoes.addAll(listOf(
             Shoe("Blazer", 7.0, "Nike", "White"),

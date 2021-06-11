@@ -30,6 +30,7 @@ class ShoeListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Menu only shows on this fragment
         setHasOptionsMenu(true)
     }
 
