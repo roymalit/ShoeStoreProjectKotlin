@@ -12,7 +12,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <!-- TODO: fix menu text not visible in light theme -->
-        <item name="android:actionMenuTextColor">@color/black</item>
+        <item name="android:textColor">@color/black</item> <!-- Needed to see menu text -->
     </style>
 </resources>

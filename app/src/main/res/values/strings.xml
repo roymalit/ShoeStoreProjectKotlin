@@ -24,7 +24,16 @@
     <string name="new_shoe_hint">Style name, shoe size (double), brand/company, description</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
-    <string name="shoe_images_hint">image 1, image 2, image 3…</string>
-    <string name="list_item_format">%1$s %2$s %n Size %3$.1f</string>
+    <string name="list_item_format">%1$s - %2$s%n  Size %3$.1f</string>
     <string name="dummy_data">Dummy Data</string>
+    <string name="company">Company</string>
+    <string name="shoe_name">Shoe name</string>
+    <string name="size">Size</string>
+    <string name="description">Description</string>
+    <string name="list_of_shoe_images">List of shoe images</string>
+    <string name="hint_list_of_shoe_images">image 1, image 2, image 3…</string>
+    <string name="hint_dummy_company">Dummy Company</string>
+    <string name="hint_shoe_name">Razer High Top</string>
+    <string name="hint_size">8.5</string>
+    <string name="hint_description">Black and red high top trainer</string>
 </resources>

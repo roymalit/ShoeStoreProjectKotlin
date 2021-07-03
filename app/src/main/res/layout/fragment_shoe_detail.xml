@@ -4,85 +4,171 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/fragment_horizontal_margin">
+
+        <TextView
+            android:id="@+id/label_shoe_name"
+            style="@style/BodyTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/shoe_name"
+            app:layout_constraintBottom_toTopOf="@+id/label_size"
+            app:layout_constraintEnd_toStartOf="@+id/et_shoe_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_company" />
+
+        <TextView
+            android:id="@+id/label_size"
+            style="@style/BodyTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/size"
+            app:layout_constraintBottom_toTopOf="@+id/label_description"
+            app:layout_constraintEnd_toStartOf="@+id/et_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_shoe_name" />
+
+        <TextView
+            android:id="@+id/label_description"
+            style="@style/BodyTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            app:layout_constraintBottom_toTopOf="@+id/label_shoe_images"
+            app:layout_constraintEnd_toStartOf="@+id/etml_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_size" />
+
+        <TextView
+            android:id="@+id/label_shoe_images"
+            style="@style/BodyTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/list_of_shoe_images"
+            app:layout_constraintBottom_toTopOf="@+id/button_cancel"
+            app:layout_constraintEnd_toStartOf="@+id/etml_new_shoe_images"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_description" />
 
         <TextView
             android:id="@+id/label_add_shoe"
             style="@style/LabelTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/add_new_shoe"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/etml_new_shoe_details"
+        <TextView
+            android:id="@+id/label_company"
             style="@style/BodyTextStyle"
-            android:layout_width="333dp"
-            android:layout_height="109dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="@string/new_shoe_hint"
-            android:importantForAutofill="no"
-            android:inputType="textMultiLine"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/company"
+            app:layout_constraintBottom_toTopOf="@+id/label_shoe_name"
+            app:layout_constraintEnd_toStartOf="@+id/et_company"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_add_shoe" />
 
         <EditText
-            android:id="@+id/etml_new_shoe_images"
-            style="@style/BodyTextStyle"
-            android:layout_width="333dp"
-            android:layout_height="109dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:id="@+id/et_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_dummy_company"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="@+id/label_company"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/label_company"
+            app:layout_constraintTop_toTopOf="@+id/label_company"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/et_shoe_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_shoe_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="@+id/label_shoe_name"
+            app:layout_constraintStart_toStartOf="@+id/et_company"
+            app:layout_constraintTop_toTopOf="@+id/label_shoe_name" />
+
+        <EditText
+            android:id="@+id/et_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_size"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toBottomOf="@+id/label_size"
+            app:layout_constraintStart_toStartOf="@+id/et_shoe_name"
+            app:layout_constraintTop_toTopOf="@+id/label_size"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/etml_description"
+            android:layout_width="0dp"
+            android:layout_height="71dp"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="@string/shoe_images_hint"
-            android:importantForAutofill="no"
+            android:hint="@string/hint_description"
             android:inputType="textMultiLine"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etml_new_shoe_details" />
+            app:layout_constraintBottom_toBottomOf="@+id/label_description"
+            app:layout_constraintStart_toStartOf="@+id/et_size"
+            app:layout_constraintTop_toTopOf="@+id/label_description"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/etml_new_shoe_images"
+            android:layout_width="0dp"
+            android:layout_height="71dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/hint_list_of_shoe_images"
+            android:inputType="textMultiLine"
+            app:layout_constraintBottom_toBottomOf="@+id/label_shoe_images"
+            app:layout_constraintStart_toStartOf="@+id/etml_description"
+            app:layout_constraintTop_toTopOf="@+id/label_shoe_images"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:text="@string/cancel"
-            app:layout_constraintBaseline_toBaselineOf="@+id/button_save"
+            app:layout_constraintBottom_toTopOf="@+id/button_dummy"
             app:layout_constraintEnd_toStartOf="@+id/button_save"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etml_new_shoe_images" />
 
         <Button
             android:id="@+id/button_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:text="@string/save"
+            app:layout_constraintBaseline_toBaselineOf="@+id/button_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_cancel"
-            app:layout_constraintTop_toBottomOf="@+id/etml_new_shoe_images" />
+            app:layout_constraintStart_toEndOf="@+id/button_cancel" />
 
         <Button
             android:id="@+id/button_dummy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="360dp"
+            android:layout_marginTop="24dp"
             android:text="@string/dummy_data"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_cancel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

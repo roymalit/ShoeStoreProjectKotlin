@@ -27,12 +27,21 @@ class ShoeDetailFragment : Fragment() {
 
         TODO: Edit readable explanation
         Readable explanation:
-        words+([space]words+)*[space]*,[space]*digit+(.5)*[space]*,
-        [space]*words+([space]words+)*[space]*,[space]*words+([space]words+)*[space]*
+        word+([space]word+)*[space]*,[whitespace]*(1...22)(.5)?[space]*,
+        [whitespace]*words+([space]words+)*[space]*,[space]*words+([space]words+)*[space]*
      */
-    // Regular expression for checking details match format
-    val pattern = "^(\\w+(?: \\w+)*) *,\\s*([1-9]|1[0-9]|2[0-2])(\\.5)? *,\\s*(\\w+(?: \\w+)*) *,\\s*(\\w+(?: \\w+)*) *\$"
+    // Regular expression for checking entered details match required format
+    private val pattern = "^(\\w+(?: \\w+)*) *,\\s*([1-9]|1[0-9]|2[0-2])(\\.5)? *,\\s*(\\w+(?: \\w+)*) *,\\s*(\\w+(?: \\w+)*) *\$"
         .toRegex(RegexOption.MULTILINE)
+
+    // TODO: Create regular expressions
+    // Validation for single line text
+    private val textPattern ="(\\w+(?: \\w+)*) *".toRegex()
+    // Validation for shoe size
+    private val sizePattern ="^(?<size>2[0-2]|1[0-9]|[1-9])(?<halfSize>\\.5)?\$".toRegex()
+    // Validation for multiline text
+    private val multiLineTextPattern = "^(?<firstWord>\\w+\\.*)(?<additionalWords>\\s\\w+\\.*)*\$"
+        .toRegex(RegexOption.UNIX_LINES)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -45,25 +54,37 @@ class ShoeDetailFragment : Fragment() {
             .navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment()) }
         
         binding.buttonSave.setOnClickListener{
-            val shoeDetails =  binding.etmlNewShoeDetails.text.toString()
+            // Grabs user inputted text
+            val company = binding.etCompany.text.toString()
+            val name = binding.etShoeName.text.toString()
+            val size = binding.etSize.text.toString()
+            val description = binding.etmlDescription.text.toString()
             val shoeImages = binding.etmlNewShoeImages.text.toString()
+            // Create string array of grabbed values
+            val shoeDetails =  arrayOf(company, name, size, description)
+
+            // Checks if any fields except Images have been left blank
+            val isViewEmpty = company.isBlank() || name.isBlank() || size.isBlank()
+                    || description.isBlank()
 
             when {
                 // Checks if either text field is empty before attempting save
                 // Add || shoeImages.isBlank() when using images editText
-                shoeDetails.isBlank() -> Toast.makeText(context,
-                    "Cannot Save! Field(s) must not be empty", Toast.LENGTH_SHORT).show()
+                isViewEmpty -> Toast.makeText(context,
+                    "Cannot Save! Only IMAGES field may be empty", Toast.LENGTH_SHORT).show()
 
                 // Check if entered details matches the RegEx pattern
-                !pattern.matches(shoeDetails) -> Toast.makeText(context,
+                !textPattern.matches(company) || !textPattern.matches(name) -> Toast.makeText(context,
                     "Entered details don't match required format. Please check again",
                     Toast.LENGTH_SHORT).show()
+                // TODO: Add other validation checks
 
                 // Adds to viewModel if validation is met
                 else -> {
                     viewModel.addShoe(shoeDetails, shoeImages)
                     Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show()
-                    binding.etmlNewShoeDetails.text = null
+                    binding.etCompany.text = null
+                    // TODO: Clear other views
 //                    binding.etmlNewShoeImages.text = null
                 }
             }

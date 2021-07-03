@@ -19,7 +19,9 @@ import com.example.shoestoreproject_kotlin.models.Shoe
 val Int.px: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
-
+/**
+ * Fragment containing the list of shoe items
+ */
 class ShoeListFragment : Fragment() {
     private lateinit var binding: FragmentShoeListBinding
 
@@ -65,6 +67,7 @@ class ShoeListFragment : Fragment() {
 
         // Observes shoeList changes, updates UI accordingly
         viewModel.shoeList.observe(viewLifecycleOwner, { list ->
+            position = 0
             list.forEach { shoe ->
                 newTextView(shoe, params)
                 position++

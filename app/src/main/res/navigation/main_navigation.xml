@@ -20,7 +20,7 @@
         <action
             android:id="@+id/action_loginFragment_to_shoeListFragment"
             app:destination="@id/shoeListFragment"
-            app:popUpTo="@id/loginFragment"
+            app:popUpTo="@id/instructionFragment"
             app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
@@ -63,8 +63,7 @@
             android:id="@+id/action_shoeListFragment_to_shoeDetailFragment"
             app:destination="@id/shoeDetailFragment"
             app:enterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_bottom"
-            app:popUpTo="@id/shoeListFragment"/>
+            app:popExitAnim="@anim/slide_out_bottom" />
     </fragment>
     <fragment
         android:id="@+id/shoeDetailFragment"
@@ -73,6 +72,7 @@
         <action
             android:id="@+id/action_shoeDetailFragment_to_shoeListFragment"
             app:destination="@id/shoeListFragment"
-            app:exitAnim="@anim/slide_out_bottom" />
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popUpTo="@id/shoeListFragment" />
     </fragment>
 </navigation>

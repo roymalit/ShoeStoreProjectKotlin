@@ -49,5 +49,4 @@ class LoginFragment : Fragment() {
             viewModel.hasVisitedBefore()
         }
     }
-
 }
