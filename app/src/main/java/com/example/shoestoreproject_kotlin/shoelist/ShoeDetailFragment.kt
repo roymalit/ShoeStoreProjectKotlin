@@ -36,12 +36,12 @@ class ShoeDetailFragment : Fragment() {
 
     // TODO: Create regular expressions
     // Validation for single line text
-    private val textPattern ="(\\w+(?: \\w+)*) *".toRegex()
+    private val textPattern ="(?<firstWord>\\w+\\.*)(?<additionalWords> ?\\w+\\.*)* ?".toRegex()
     // Validation for shoe size
     private val sizePattern ="^(?<size>2[0-2]|1[0-9]|[1-9])(?<halfSize>\\.5)?\$".toRegex()
     // Validation for multiline text
-    private val multiLineTextPattern = "^(?<firstWord>\\w+\\.*)(?<additionalWords>\\s\\w+\\.*)*\$"
-        .toRegex(RegexOption.UNIX_LINES)
+    private val multiLineTextPattern = "^(?<firstWord>\\w+\\.*)(?<additionalWords>\\s?\\w+\\.*)* ?$"
+        .toRegex(RegexOption.MULTILINE)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -59,7 +59,7 @@ class ShoeDetailFragment : Fragment() {
             val name = binding.etShoeName.text.toString()
             val size = binding.etSize.text.toString()
             val description = binding.etmlDescription.text.toString()
-            val shoeImages = binding.etmlNewShoeImages.text.toString()
+            val shoeImages = binding.etmlShoeImages.text.toString()
             // Create string array of grabbed values
             val shoeDetails =  arrayOf(company, name, size, description)
 
@@ -75,9 +75,16 @@ class ShoeDetailFragment : Fragment() {
 
                 // Check if entered details matches the RegEx pattern
                 !textPattern.matches(company) || !textPattern.matches(name) -> Toast.makeText(context,
-                    "Entered details don't match required format. Please check again",
+                    "Entered COMPANY or NAME does not match required format. Please check again",
                     Toast.LENGTH_SHORT).show()
                 // TODO: Add other validation checks
+                !sizePattern.matches(size) -> Toast.makeText(context,
+                    "Entered SIZE does not match required format. Please check again",
+                    Toast.LENGTH_SHORT).show()
+
+                !multiLineTextPattern.matches(description) -> Toast.makeText(context,
+                    "Entered DESCRIPTION does not match required format. Please check again",
+                    Toast.LENGTH_SHORT).show()
 
                 // Adds to viewModel if validation is met
                 else -> {
@@ -85,7 +92,10 @@ class ShoeDetailFragment : Fragment() {
                     Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show()
                     binding.etCompany.text = null
                     // TODO: Clear other views
-//                    binding.etmlNewShoeImages.text = null
+                    binding.etShoeName.text = null
+                    binding.etSize.text = null
+                    binding.etmlDescription.text = null
+                    binding.etmlShoeImages.text = null
                 }
             }
         }
