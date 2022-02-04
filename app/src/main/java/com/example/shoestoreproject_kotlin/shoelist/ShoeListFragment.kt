@@ -66,15 +66,20 @@ class ShoeListFragment : Fragment() {
         params.setMargins(3.px, 8.px, 3.px, 0)
 
         // Observes shoeList changes, updates UI accordingly
-        viewModel.shoeList.observe(viewLifecycleOwner, { list ->
+        viewModel.shoeList.observe(viewLifecycleOwner) { list ->
             position = 0
             list.forEach { shoe ->
                 newTextView(shoe, params)
                 position++
             }
-        })
+        }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.unbind()
     }
 
     // Creates a new text view for a shoe object

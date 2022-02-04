@@ -31,6 +31,6 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
         // Get viewModel
-        viewModel = ViewModelProvider(this).get(ShoeViewModel::class.java)
+        viewModel = ViewModelProvider(this)[ShoeViewModel::class.java]
     }
 }
