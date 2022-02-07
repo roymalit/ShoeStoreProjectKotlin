@@ -1,5 +1,7 @@
 package com.example.shoestoreproject_kotlin.shoelist
 
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -100,8 +102,9 @@ class ShoeViewModel: ViewModel() {
         }
     }
 
-    fun callWorking(){
+    fun callWorking(view: View){
         Timber.i("Call worked!!")
+        Toast.makeText(view.context, "Call Worked!!", Toast.LENGTH_SHORT).show()
     }
 
     // TODO: validation function for two-way binding implementation

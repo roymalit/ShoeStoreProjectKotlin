@@ -34,10 +34,13 @@ class ShoeDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_detail,
             container, false)
 
+        // Set the viewmodel for databinding
+        binding.shoeViewModel = viewModel
+
             // Button click listeners
         binding.buttonCancel.setOnClickListener { findNavController()
             .navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment()) }
-        
+
 //        binding.buttonSave.setOnClickListener{
 //            // Grabs user inputted text
 //            val company = binding.etCompany.text.toString()
@@ -90,5 +93,10 @@ class ShoeDetailFragment : Fragment() {
 //        }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 }
