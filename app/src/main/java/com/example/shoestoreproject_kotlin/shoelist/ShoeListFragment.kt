@@ -58,7 +58,7 @@ class ShoeListFragment : Fragment() {
 
         // Set the viewmodel for databinding
         binding.shoeViewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         // Reusable margin parameters. Use dp converted to px
         val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(

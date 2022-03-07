@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <!-- Variable in XML must also be initialised in fragment onCreate(View)  -->
         <variable
             name="shoeViewModel"
             type="com.example.shoestoreproject_kotlin.shoelist.ShoeViewModel" />
@@ -177,19 +178,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etml_shoe_images" />
 
-        <!-- TODO: Convert to call addShoe() from viewModel -->
         <Button
             android:id="@+id/button_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{(v) -> shoeViewModel.callWorking(v)}"
+            android:onClick="@{() -> shoeViewModel.addShoe(shoe)}"
             android:text="@string/save"
             app:layout_constraintBaseline_toBaselineOf="@+id/button_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_cancel" />
 
-        <!-- TODO: Fix dummyData call -->
         <Button
             android:id="@+id/button_dummy"
             android:layout_width="wrap_content"

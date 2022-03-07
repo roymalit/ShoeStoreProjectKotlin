@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.shoestoreproject_kotlin.R
 import com.example.shoestoreproject_kotlin.databinding.FragmentShoeDetailBinding
+import com.example.shoestoreproject_kotlin.models.Shoe
 
 /**
  * Fragment containing a shoe item's details
@@ -20,14 +22,6 @@ class ShoeDetailFragment : Fragment() {
 
     private val viewModel by activityViewModels<ShoeViewModel>()
 
-    // Validation for single line text
-    private val textPattern ="(?<firstWord>\\w+\\.*)(?<additionalWords> ?\\w+\\.*)* ?".toRegex()
-    // Validation for shoe size
-    private val sizePattern ="^(?<size>2[0-2]|1[0-9]|[1-9])(?<halfSize>\\.5)?\$".toRegex()
-    // Validation for multiline text
-    private val multiLineTextPattern = "^(?<firstWord>\\w+\\.*)(?<additionalWords>\\s?\\w+\\.*)* ?$"
-        .toRegex(RegexOption.MULTILINE)
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
@@ -36,67 +30,60 @@ class ShoeDetailFragment : Fragment() {
 
         // Set the viewmodel for databinding
         binding.shoeViewModel = viewModel
+        binding.shoe = Shoe("",0.0,"","")
 
-            // Button click listeners
+        // Button click listeners
         binding.buttonCancel.setOnClickListener { findNavController()
             .navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment()) }
 
-//        binding.buttonSave.setOnClickListener{
-//            // Grabs user inputted text
-//            val company = binding.etCompany.text.toString()
-//            val name = binding.etShoeName.text.toString()
-//            val size = binding.etSize.text.toString()
-//            val description = binding.etmlDescription.text.toString()
-//            val shoeImages = binding.etmlShoeImages.text.toString()
-//            // Create string array of grabbed values
-//            val shoeDetails =  arrayOf(company, name, size, description)
-//
-//            // Checks if any fields except Images have been left blank
-//            val isViewEmpty = company.isBlank() || name.isBlank() || size.isBlank()
-//                    || description.isBlank()
-//
-//            when {
-//                // Checks if either text field is empty before attempting save
-//                // Add || shoeImages.isBlank() when using images editText
-//                isViewEmpty -> Toast.makeText(context,
-//                    "Cannot Save! Only IMAGES field may be empty", Toast.LENGTH_SHORT).show()
-//
-//                // Check if entered details matches the RegEx pattern
-//                !textPattern.matches(company) || !textPattern.matches(name) -> Toast.makeText(context,
-//                    "Entered COMPANY or NAME does not match required format. Please check again",
-//                    Toast.LENGTH_SHORT).show()
-//
-//                !sizePattern.matches(size) -> Toast.makeText(context,
-//                    "Entered SIZE does not match required format. Please check again",
-//                    Toast.LENGTH_SHORT).show()
-//
-//                !multiLineTextPattern.matches(description) -> Toast.makeText(context,
-//                    "Entered DESCRIPTION does not match required format. Please check again",
-//                    Toast.LENGTH_SHORT).show()
-//
-//                // Adds to viewModel if validation is met
-//                else -> {
-//                    viewModel.addShoe(shoeDetails, shoeImages)
-//                    Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show()
-//                    binding.etCompany.text = null
-//                    binding.etShoeName.text = null
-//                    binding.etSize.text = null
-//                    binding.etmlDescription.text = null
-//                    binding.etmlShoeImages.text = null
-//                }
-//            }
-//        }
+        // Checks if a message is waiting to be triggered
+        viewModel.alertMessage.observe(viewLifecycleOwner){ incomingMessage ->
+            when (incomingMessage) {
+                // TODO: Replace toasts to solve Android 7.1 (API 25) toast issue
+                viewModel.successShoeAdded -> {
+                    Toast.makeText(context, viewModel.successShoeAdded, Toast.LENGTH_SHORT).show()
+                    viewModel.hasAddedShoeToList()
+                    viewModel.hasShownMessage()
+                }
 
-//        binding.buttonDummy.setOnClickListener{
-//            viewModel.dummyData()
-//            Toast.makeText(context, "Dummy data added!", Toast.LENGTH_SHORT).show()
-//        }
+                viewModel.errorViewEmpty -> {
+                    Toast.makeText(context, "Cannot Save! Only IMAGES field may be empty",
+                        Toast.LENGTH_SHORT).show()
+                    viewModel.hasShownMessage()
+                }
+
+                viewModel.errorTextInvalid -> {
+                    Toast.makeText(context, "Entered COMPANY or NAME does not match required " +
+                            "format. Please check again", Toast.LENGTH_SHORT).show()
+                    viewModel.hasShownMessage()
+                }
+
+                viewModel.errorSizeInvalid -> {
+                    Toast.makeText(context, "Entered SIZE does not match required format. Please check again",
+                        Toast.LENGTH_SHORT).show()
+                    viewModel.hasShownMessage()
+
+                }
+
+                viewModel.errorMultilineInvalid -> {
+                    Toast.makeText(context, "Entered DESCRIPTION does not match required format. Please check again",
+                        Toast.LENGTH_SHORT).show()
+                    viewModel.hasShownMessage()
+                }
+            }
+        }
+
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    // TODO: Resolve clearViews() resulting in blank item adding to list - entered details lost
+    private fun clearViews(){
+        binding.etCompany.text = null
+        binding.etShoeName.text = null
+        binding.etSize.text = null
+        binding.etmlDescription.text = null
+        binding.etmlShoeImages.text = null
     }
+
 }

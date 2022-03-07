@@ -19,7 +19,11 @@ object Converter {
 
     @InverseMethod("stringToDouble")
     @JvmStatic fun doubleToString(value: Double): String {
-        return value.toString()
+        return if (value != 0.0){
+            value.toString()
+        } else {
+            return ""
+        }
     }
 
     // Converts a String to a List<String>
@@ -36,7 +40,7 @@ object Converter {
         return if (value?.isNotEmpty() == true){
             value.joinToString()
         } else {
-            return "No Images"
+            return ""
         }
     }
 }
