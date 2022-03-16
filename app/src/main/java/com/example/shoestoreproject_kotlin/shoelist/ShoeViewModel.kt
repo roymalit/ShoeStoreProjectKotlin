@@ -76,28 +76,11 @@ class ShoeViewModel: ViewModel() {
     /*
     * Adds new shoe to the list
     */
-    fun addShoe (shoeDetails: Array<String>, shoeImages: String){
-        val company = shoeDetails[0].trim()
-        val name = shoeDetails[1].trim()
-        val size = shoeDetails[2].trim().toDouble()
-        val description = shoeDetails[3].trim()
-        // Handles text list of images when implemented. Not mandatory
-        val imagesList = shoeImages.trim().split(",")
-
-        // Creates Shoe object and adds to list
-        _shoe.value = Shoe(name, size, company, description, imagesList)
-        listOfShoes.add(shoe.value!!)
-        // For testing
-        Timber.i(listOfShoes.toString())
-    }
-
-    // TODO: addShoe function for two-way binding implementation
     fun addShoe (shoe: Shoe) {
         if (validate(shoe)){
             // Creates Shoe object and adds to list
             _shoe.value = shoe
             listOfShoes.add(shoe)
-            // TODO: Create and call a 'message' LiveData for confirming shoe has been added
             _alertMessage.value = successShoeAdded
             _addedToList.value = true
             // For testing
@@ -117,7 +100,7 @@ class ShoeViewModel: ViewModel() {
     private val multiLineTextPattern = "^(?<firstWord>\\w+\\.*)(?<additionalWords>\\s?\\w+\\.*)* ?$"
         .toRegex(RegexOption.MULTILINE)
 
-    // TODO: validation function for two-way binding implementation
+    // Validation function for two-way binding implementation
     private fun validate (shoe: Shoe): Boolean{
         val isFormF = isFormFilled(shoe)
         val isTextPV = isTextPatternValid(shoe)
